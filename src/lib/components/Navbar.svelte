@@ -10,7 +10,8 @@
 		CheckCircle2,
 		Bot,
 		FolderKanban,
-		Plus
+		Plus,
+		ArrowLeft
 	} from '@lucide/svelte';
 
 	let { 
@@ -51,7 +52,16 @@
 
 <header class="h-16 border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-40 px-4 sm:px-6 flex items-center justify-between">
 	<!-- Left: Logo & Project Info -->
-	<div class="flex items-center space-x-4">
+	<div class="flex items-center space-x-3 sm:space-x-4">
+		<!-- Back to Apps Hub Link -->
+		<a 
+			href="/"
+			title="Kembali ke App Launcher Hub"
+			class="px-2.5 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-800 text-xs font-semibold flex items-center gap-1.5 transition shrink-0 group">
+			<ArrowLeft class="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
+			<span class="hidden sm:inline">Apps Hub</span>
+		</a>
+
 		<div class="flex items-center space-x-3">
 			<div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 via-teal-400 to-cyan-500 flex items-center justify-center shadow-lg shadow-emerald-500/20">
 				<FileSpreadsheet class="w-5 h-5 text-slate-950 stroke-[2.5]" />
@@ -95,6 +105,15 @@
 			class="px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all {activeTab === 'code' ? 'bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20' : 'text-slate-400 hover:text-slate-200'}">
 			<Code2 class="w-3.5 h-3.5" />
 			<span>Code Studio</span>
+		</button>
+		<button 
+			onclick={() => onTabChange('app')}
+			class="px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all {activeTab === 'app' ? 'bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 font-bold shadow-md shadow-emerald-500/25' : 'text-cyan-300 hover:text-cyan-200 hover:bg-slate-800/60'}">
+			<Eye class="w-3.5 h-3.5 {activeTab === 'app' ? 'text-slate-950' : 'text-cyan-400'}" />
+			<span>Tampilan Aplikasi</span>
+			{#if canDeploy}
+				<span class="w-1.5 h-1.5 rounded-full {activeTab === 'app' ? 'bg-slate-950' : 'bg-emerald-400 animate-pulse'}"></span>
+			{/if}
 		</button>
 	</div>
 
